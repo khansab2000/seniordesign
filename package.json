@@ -4,7 +4,10 @@
   "description": "Santa Clara University Senior Design Project.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node index.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,15 @@
   "bugs": {
     "url": "https://github.com/carlosm11j/seniordesign/issues"
   },
-  "homepage": "https://github.com/carlosm11j/seniordesign#readme"
+  "homepage": "https://github.com/carlosm11j/seniordesign#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "google-search-results-nodejs": "^2.0.1"
+  },
+  "devDependencies": {
+    "concurrently": "^6.4.0"
+  }
 }
