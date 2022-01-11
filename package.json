@@ -20,11 +20,15 @@
   },
   "homepage": "https://github.com/carlosm11j/seniordesign#readme",
   "dependencies": {
+    "aws-sdk": "^2.1054.0",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "google-search-results-nodejs": "^2.0.1"
+    "fs": "^0.0.1-security",
+    "google-search-results-nodejs": "^2.0.1",
+    "image-downloader": "^4.0.3",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "concurrently": "^6.4.0"
