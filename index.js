@@ -21,9 +21,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-let images = [];
+let response = {};
 
 function uploadFile(imageUrl) {
+  response['imageUrl'] = imageUrl;
+
   options = {
     url: imageUrl,
     dest: 'test1.jpeg'
@@ -84,6 +86,8 @@ function getGender(filename) {
         console.log(`  BoundingBox.Left:       ${data.BoundingBox.Left}`)
         console.log(`  BoundingBox.Top:        ${data.BoundingBox.Top}`)
         console.log(`  Age.Range.Low:          ${data.AgeRange.Low}`)
+        response['ageLow'] = data.AgeRange.Low;
+        response['ageHigh'] = data.AgeRange.High;
         console.log(`  Age.Range.High:         ${data.AgeRange.High}`)
         console.log(`  Smile.Value:            ${data.Smile.Value}`)
         console.log(`  Smile.Confidence:       ${data.Smile.Confidence}`)
@@ -92,7 +96,9 @@ function getGender(filename) {
         console.log(`  Sunglasses.Value:       ${data.Sunglasses.Value}`)
         console.log(`  Sunglasses.Confidence:  ${data.Sunglasses.Confidence}`)
         console.log(`  Gender.Value:           ${data.Gender.Value}`)
+        response['genderValue'] = data.Gender.Value;
         console.log(`  Gender.Confidence:      ${data.Gender.Confidence}`)
+        response['genderConfidence'] = data.Gender.Confidence;
         console.log(`  Beard.Value:            ${data.Beard.Value}`)
         console.log(`  Beard.Confidence:       ${data.Beard.Confidence}`)
         console.log(`  Mustache.Value:         ${data.Mustache.Value}`)
@@ -119,29 +125,21 @@ function getGender(filename) {
   });
 }
 
-app.get('/getImages', (req, res) => {
-  res.writeHead(200, {
-    'Content-Type': 'application/json',
-  });
-
-  res.end(JSON.stringify(images));
-});
-
 app.post('/findImages', function(req, res) {
   search.json({
     q: req.body.query,
     tbm: "isch",
     ijn: "0"
     }, (result) => {
+      response['query'] = req.body.query;
       uploadFile(result.images_results[0].thumbnail);
-      images.push(result);
   });
 
   res.writeHead(200, {
     'Content-Type': 'application/json',
   });
-
-  res.send(JSON.stringify(images));
+  
+  res.send(response);
 });
 
 app.listen(port, () => {
