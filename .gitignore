@@ -1,13 +1,4 @@
-.env
-
-/node_modules
-
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-/.aws
-
-*.jpeg
+env/bin
+env/include
+env/lib
+env/pyvenv.cfg
